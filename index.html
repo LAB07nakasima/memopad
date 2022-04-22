@@ -16,63 +16,96 @@
 
   <main>
     <div class="vegetable_text_1">
+      <p>野菜メモ①🍅</p>
       <textarea id="vegetable_1"></textarea>
-      <input type="text" id="menu_1">
+      <div id="vegetable_rightside_1">
+        <div class="vegetable_input_1">
+          <input type="text" id="menu_1">
+        </div>
+
+        
+          <ul>
+            <li id="save_1">保存</li>
+            <li id="clear_1">削除</li>
+            <li id="result_1">メニュー</li>
+          </ul>
+        
+      </div>
     </div>
 
+
     <div class="vegetable_text_2">
-      <textarea id="vegetables_2"></textarea>
-      <input type="text" id="menu_2">
+      <p>野菜メモ②🥔</p>
+      <textarea id="vegetable_2"></textarea>
+      <div id="vegetable_rightside_2"> 
+        <div class="vegetable_input_2">
+          <input type="text" id="menu_2">
+        </div>
+          <ul>
+            <li id="save_2">保存</li>
+            <li id="clear_2">削除</li>
+            <li id="result_2">メニュー</li>
+          </ul>
+      </div> 
     </div>
 
     <div class="vegetable_text_3">
-      <textarea id="vegetables_3"></textarea>
-      <input type="text" id="menu_3">
+      <p>野菜メモ③🥩</p>
+      <textarea id="vegetable_3"></textarea>
+      <div id="vegetable_rightside_3">
+        <div class="vegetable_input_3">
+          <input type="text" id="menu_3">
+        </div>
+
+
+          <ul>
+            <li id="save_3">保存</li>
+            <li id="clear_3">削除</li>
+            <li id="result_3">メニュー</li>
+          </ul>
+      </div>
     </div>
-
-    
-
-    <ul>
-      <li id="save">保存</li>
-      <li id="clear">削除</li>
-      <li id="menu">メニュー</li>
-
-    </ul>
   </main>  
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
   
-
-  $("#save").on('click',function(){
+// 保存１　のゾーン
+  $("#save_1").on('click',function(){
     const text1 =$('#vegetable_1').val();
     const menu1 =$('#menu_1').val();
     const data1 = {
       vege1: text1,
       menu1: menu1,};
+    
+    console.log(data1);
+    const jsonData1 =JSON.stringify(data1);
+    console.log(jsonData1);
+    localStorage.setItem("dish1", jsonData1);
+  });
 
-    const text2 =$('#vegetables_2').val();
+
+  $("#save_2").on('click',function(){
+    const text2 =$('#vegetable_2').val();
     const menu2 =$('#menu_2').val();
     const data2 ={
       vege2:text2,
       menu2:menu2,  };
 
-    const text3 =$('#vegetables_3').val(); 
-    const menu3 =$('#menu_3').val(); 
-    const data3 ={
-      vege3: text3,
-      menu3:menu3, };
-
-    console.log(data1);
-    const jsonData1 =JSON.stringify(data1);
-    console.log(jsonData1);
-    localStorage.setItem("dish1", jsonData1);
-
     console.log(data2);
     const jsonData2 = JSON.stringify(data2);
     console.log(jsonData2);
     localStorage.setItem("dish2" , jsonData2);
+  });
+
+
+  $("#save_3").on('click',function(){
+    const text3 =$('#vegetable_3').val(); 
+    const menu3 =$('#menu_3').val(); 
+    const data3 ={
+      vege3: text3,
+      menu3:menu3, };
 
     console.log(data3);
     const jsonData3 = JSON.stringify(data3);
@@ -80,19 +113,14 @@
     localStorage.setItem("dish3", jsonData3);
   });
 
+
   // let vegetables = ["vegetable_1","vegetables_2","vegetables_3"]
   // let deshes = ["dish1","dish2","dish3"]
 
-  $('#clear').on('click',function(){
+  $('#clear_1').on('click',function(){
     localStorage.removeItem("dish1");
-    localStorage.removeItem("dish2");
-    localStorage.removeItem("dish3");
     $("#vegetable_1").val("");
-    $("#vegetables_2").val("");
-    $("#vegetables_3").val("");
     $("#menu_1").val("");
-    $("#menu_2").val("");
-    $("#menu_3").val("");
 
     if(localStorage.getItem('dish1')){
       const jsonData1 = localStorage.getItem('dish1');
@@ -102,27 +130,120 @@
       $('#vegetable_1').val(data1.vege1);
       $('#menu_1').val(data1.menu1);
     };
+  });
+
+  $('#clear_2').on('click',function(){
+    localStorage.removeItem("dish2");
+    $("#vegetable_2").val("");
+    $("#menu_2").val("");
 
     if(localStorage.getItem('dish2')){
       const jsonData2 = localStorage.getItem('dish2');
       console.log(jsonData2);
       const jdata2 = JSON.parse(jsonData2);
 
-      $('#vegetables_2').val(data2.vege2);
+      $('#vegetable_2').val(data2.vege2);
       $('#menu_2').val(data2.menu2);
     };
+  });  
 
-    if(localStorage.getItem('dish3')){
+  $('#clear_3').on('click',function(){
+    localStorage.removeItem("dish3");
+    $("#vegetable_3").val("");
+    $("#menu_3").val("");
+
+   if(localStorage.getItem('dish3')){
       const jsonData3 = localStorage.getItem('dish3');
       console.log(jsonData3);
       const jdata3 = JSON.parse(jsonData3);
 
-      $('#vegetables_3').val(data3.vege3);
+      $('#vegetable_3').val(data3.vege3);
       $('#menu_3').val(data3.menu3);
-
     };
-
   });
+
+
+    const list01 = ["カルボナーラ","中華スープ","オムライス"]
+    const list02 = ["肉じゃが","ポトフ","カレー"]
+    const list03 = ["肉じゃが","きんぴら","しりしり"]
+    const list04 = ["豚キムチ","豚汁","お好み焼き"]
+    const list05 = ["ハンバーグ","ナポリタン","野菜炒め"]
+  
+
+    $('#result_1').on('click',function(){
+
+      const list01 = ["カルボナーラ","中華スープ","オムライス"];
+      const list02 = ["肉じゃが","ポトフ","カレー"];
+      const list03 = ["肉じゃが","きんぴら","しりしり"];
+      const list04 = ["豚キムチ","豚汁","お好み焼き"];
+      const list05 = ["ハンバーグ","ナポリタン","野菜炒め"];
+
+      console.log($('#vegetable_1').val() );
+      if ($('#vegetable_1').val()  == "たまご" || $('#vegetable_1').val()  == "卵"){
+        console.log("卵")
+        $("#menu_1").val(list01);
+      
+      }else if ($('#vegetable_1').val() == "じゃがいも") {
+        console.log("じゃがいも")
+        $('#menu_1').val(list02);
+
+    
+      }else if ($('#vegetable_1').val() == "人参" || $('#vegetable_1').val() ==  "にんじん"){
+        console.log("にんじん")
+        $('#menu_1').val(list03);
+    
+      }else if ($('#vegetable_1').val() == "豚肉" || $('#vegetable_1').val() == "ぶたにく"){
+        console.log("豚肉")
+        $('#menu_1').val(list04);
+
+      }else if ($('#vegetable_1').val() == "玉ねぎ" || $('#vegetable_1').val() == "たまねぎ"){
+        console.log("玉ねぎ")
+        $('#menu_1').val(list05);
+      };
+    });  
+
+
+    $('#result_2').on('click',function(){
+      console.log($('#vegetable_2').val() );
+      if ($('#vegetable_2').val()  == "たまご" || $('#vegetable_2').val()  == "卵"){
+        $("#menu_2").val(list01);
+        
+      }else if ($('#vegetable_2').val() == "じゃがいも") {
+        $('#menu_2').val(list02);
+      
+      }else if ($('#vegetable_2').val() == "人参" || $('#vegetable_2').val() == "にんじん"){
+        $('#menu_2').val(list03);
+      
+      }else if ($('#vegetable_2').val() == "豚肉" || $('#vegetable_2').val() == "ぶたにく"){
+        $('#menu_2').val(list04);
+
+      }else if ($('#vegetable_2').val() == "玉ねぎ" ||$('#vegetable_2').val() == "たまねぎ"){
+        $('#menu_2').val(list05);
+     };
+    });
+
+
+    $('#result_3').on('click',function(){
+      console.log($('#vegetable_3').val() );
+      if ($('#vegetable_3').val()  == "たまご" || $('#vegetable_3').val()  == "卵"){
+        $("#menu_3").val(list01);
+        
+      }else if ($('#vegetable_3').val() == "じゃがいも") {
+        $('#menu_3').val(list02);
+      
+      }else if ($('#vegetable_3').val() == "人参" || $('#vegetable_3').val() == "にんじん"){
+        $('#menu_3').val(list03);
+      
+      }else if ($('#vegetable_3').val() == "豚肉" || $('#vegetable_3').val() == "ぶたにく"){
+        $('#menu_3').val(list04);
+
+      }else if ($('#vegetable_3').val() == "玉ねぎ" ||$('#vegetable_3').val() == "たまねぎ"){
+        $('#menu_3').val(list05);
+      };
+
+    });
+
+
 
 </script>
 
